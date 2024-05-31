@@ -36,11 +36,12 @@ const Products = () => {
                 <p>Loading...</p>
             ) : (
                 products.map((product) => (
-                    <div key={product._id}>
+                    <div key={product._id} className="product-card">
+                        <img src={product.imagem || "https://atlanticbridge.com.br/wp-content/uploads/2023/09/Validar-carteira-de-motorista-estrangeira.webp"} alt={product.titulo} />
                         <h2>{product.titulo}</h2>
                         <p>Em Stock: {product.stock}</p>
-                       {product.preço} € 
-                       <p>{product.descrição} </p>
+                        {product.preço} € 
+                        <p>{product.descrição} </p>
                     </div>
                 ))
             )}

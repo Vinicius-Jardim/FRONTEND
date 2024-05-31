@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Importe useNavigate
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-
+import './Login.css';
 
 function LoginPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const navigate = useNavigate(); // Chame useNavigate
+    const navigate = useNavigate();
 
     const handleLogin = async () => {
         try {
@@ -22,7 +22,7 @@ function LoginPage() {
             if (response.status === 200) {
                 const data = await response.json();
                 localStorage.setItem('token', data.token);
-                navigate('/products'); // Redirecionar para a página de produtos
+                navigate('/products');
             } else {
                 const errorData = await response.json();
                 setErrorMessage(errorData.message || 'Erro interno do servidor. Por favor, tente novamente mais tarde ou troque de usuário.');
@@ -31,25 +31,28 @@ function LoginPage() {
             setErrorMessage('Erro interno do servidor. Por favor, tente novamente mais tarde ou troque de usuário.');
         }
     };
+
     return (
-        <div>
-            <input
-                type="username"
-                placeholder="Nome de usuário"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-            />
-            <input
-                type="password"
-                placeholder="Senha"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            <button onClick={handleLogin}>Entrar</button>
-            {errorMessage && <p>{errorMessage}</p>}
-            <p>Esqueceu-se da palavra-passe? <Link to="/forgot-password">Recuperar Palavra-passe</Link></p>
+        <div className="login-page">
+            <h1>Login</h1>
+            <form className="login-form">
+                <input
+                    type="username"
+                    placeholder="Nome de usuário"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                />
+                <input
+                    type="password"
+                    placeholder="Senha"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                <button type="button" onClick={handleLogin}>Entrar</button>
+                {errorMessage && <p className="error-message">{errorMessage}</p>}
+                <p>Esqueceu-se da palavra-passe? <Link to="/forgot-password">Recuperar Palavra-passe</Link></p>
+            </form>
         </div>
-        
     );
 }
 

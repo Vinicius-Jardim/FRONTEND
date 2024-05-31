@@ -1,4 +1,4 @@
-.login-page {
+.container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,13 +8,13 @@
     font-family: Arial, sans-serif;
   }
   
-  .login-page h1 {
+  .container h4 {
     font-size: 2.5em;
     margin-bottom: 1em;
-    color: #b56576; /* Cor rosa para o título */
+    color: #ff69b4; /* Cor rosa para o título */
   }
   
-  .login-form {
+  .form-container {
     display: flex;
     flex-direction: column;
     width: 300px;
@@ -25,26 +25,26 @@
     background-color: #fff; /* Fundo branco para a caixa de diálogo */
   }
   
-  .login-form input {
+  .input-field {
     padding: 0.5em;
     border: 1px solid #ddd;
     border-radius: 5px;
   }
   
-  .login-form button {
+  .btn {
     padding: 0.5em;
     border: none;
     border-radius: 5px;
-    background-color: #b56576; /* Cor rosa para o botão */
+    background-color: #ff69b4; /* Cor rosa para o botão */
     color: #fff;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
   
-  .login-form button:hover {
-    background-color: #b56576; /* Cor rosa mais escura para o hover do botão */
+  .btn:hover {
+    background-color: #ff1493; /* Cor rosa mais escura para o hover do botão */
   }
   
-  .login-form .error-message {
+  .error-message {
     color: #ff0000;
   }
