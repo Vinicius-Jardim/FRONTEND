@@ -5,7 +5,9 @@ const HomePage = () => {
     return (
         <div className="homePage">
         <h1>Bem vindo!</h1>
-        <Link to="/products">Products</Link>
+       <p> <Link to="/products">Products</Link> </p>
+        <p><Link to="/login">Login</Link> </p>
+        <Link to="/orders">Orders</Link>
         </div>
     );
     }
