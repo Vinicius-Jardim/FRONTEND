@@ -1,12 +1,16 @@
+import React from "react";
+import "./Orders.css";
 
-
-
+import config from "../Config";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; 
 
 const Orders = () => {
     let navigate = useNavigate();
     const [loading , setLoading] = useState(true);
-    const [products, setProducts] = useState([]);
+    const [orders, setOrders] = useState([]);
 
+    // eslint-disable-next-line
     useEffect(() => {
         if (!config.token) {
             navigate('/login');
@@ -24,7 +28,7 @@ const Orders = () => {
             });
         }
         return () => setOrders([]);
-    }, []);
+    }, [navigate]);
 
     return (
         <div className="orders">
@@ -32,16 +36,17 @@ const Orders = () => {
                 <p>Loading...</p>
             ) : (
                 orders.map((order) => (
-                    <div key={product._id}>
-                        <h2>{product.titulo}</h2>
-                        <p>Em Stock: {product.stock}</p>
-                       {product.preço} € 
-                       <p>{product.descrição} </p>
+                    <div key={order._id}>
+                        <h2>Produto ID: {order.products}</h2>
+                        <p>Quantidade: {order.quantity}</p>
+                        <p>Cliente ID: {order.client}</p>
+                        <p>Data: {new Date(order.date).toLocaleDateString()}</p>
+                        <p>Preço Total: {order.priceTotal} €</p>
                     </div>
                 ))
             )}
         </div>
     );
-}
+};
 
 export default Orders;

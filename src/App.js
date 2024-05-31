@@ -1,8 +1,12 @@
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import HomePage from './homePage/HomePage';
 import Orders from './orders/Orders';
 import Products from './products/Products'; 
+import Login from './login/Login';
+import Register from './users/Register';
+import ForgotPassword from './users/ForgotPassword';
 
 
 
@@ -16,6 +20,9 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/products" element={<Products />} />
           <Route path="/orders" element={<Orders />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
         </Routes>
         
       </main>

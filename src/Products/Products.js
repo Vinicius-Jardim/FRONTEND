@@ -1,8 +1,10 @@
+import React from "react";
 import "./Products.css";
 import config from "../Config";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; 
-import Product from "./Product";
+
+
 
 const Products = () => {
     let navigate = useNavigate();
@@ -26,7 +28,7 @@ const Products = () => {
             });
         }
         return () => setProducts([]);
-    }, []);
+    }, [navigate]);
 
     return (
         <div className="products">
