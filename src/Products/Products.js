@@ -1,8 +1,8 @@
-import Product from "./Product";
 import "./Products.css";
 import config from "../Config";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; 
+import Product from "./Product";
 
 const Products = () => {
     let navigate = useNavigate();
@@ -29,15 +29,16 @@ const Products = () => {
     }, []);
 
     return (
-        <div>
+        <div className="products">
             {loading ? (
                 <p>Loading...</p>
             ) : (
                 products.map((product) => (
                     <div key={product._id}>
                         <h2>{product.titulo}</h2>
-                        <p>{product.categoria}</p>
-                        {/* Renderize outras propriedades do produto aqui */}
+                        <p>Em Stock: {product.stock}</p>
+                       {product.preço} € 
+                       <p>{product.descrição} </p>
                     </div>
                 ))
             )}
