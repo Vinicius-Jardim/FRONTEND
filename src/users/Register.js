@@ -7,7 +7,8 @@ const NewUserPage = () => {
     email: '',
     password: '',
     roleName: '',
-    roleScopes: ''
+    roleScopes: '',
+    confirmPassword: ''
   });
 
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const NewUserPage = () => {
     }
   
     try {
-      const response = await fetch('http://127.0.0.1:3000/users/create', {
+      const response = await fetch('http://127.0.0.1:3000/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -41,16 +42,19 @@ const NewUserPage = () => {
           }),
       });
   
-      if (response.status === 201) {
-        console.log('Usuário criado com sucesso:', await response.json());
+      const data = await response.json();
+  
+      if (response.status === 200) {
+        prompt("Usuário criado com sucesso. Copie o token:", data.token);
         navigate('/login');
       } else {
-        console.log('Erro ao criar usuário:', await response.json());
+        console.log('Erro ao criar usuário:', data);
       }
     } catch (error) {
       console.error('Erro ao criar usuário:', error);
     }
   };
+
 return (
   <div>
   
@@ -80,6 +84,30 @@ return (
           required
         />
         <label htmlFor="email">Email</label>
+      </div>
+      <div className="input-field col s12">
+        <input
+          id="nomee2"
+          type="text"
+          name="roleName"
+          className="validate"
+          value={formData.roleName}
+          onChange={handleChange}
+          required
+        />
+        <label htmlFor="nomee2">Nome2</label>
+      </div>
+      <div className="input-field col s12">
+        <input
+          id="name2"
+          type="text"
+          name="roleScopes"
+          className="validate"
+          value={formData.roleScopes}
+          onChange={handleChange}
+          required
+        />
+        <label htmlFor="name2">scope</label>
       </div>
       <div className="input-field col s12">
         <input
