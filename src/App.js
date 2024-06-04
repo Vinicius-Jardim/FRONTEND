@@ -6,7 +6,8 @@ import Orders from './orders/Orders';
 import Products from './products/Products'; 
 import Login from './login/Login';
 import Register from './users/Register';
-import ForgotPassword from './users/ForgotPassword';
+import PasswordRecovery from './users/PasswordRecovery';
+import PasswordReset from './users/PasswordReset';
 
 
 
@@ -22,7 +23,9 @@ function App() {
           <Route path="/orders" element={<Orders />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/recover" element={<PasswordRecovery />} />
+          <Route path="/reset/:token" element={<PasswordReset />} />
+
         </Routes>
         
       </main>

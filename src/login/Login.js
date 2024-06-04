@@ -50,7 +50,7 @@ function LoginPage() {
                 />
                 <button type="button" onClick={handleLogin}>Entrar</button>
                 {errorMessage && <p className="error-message">{errorMessage}</p>}
-                <p>Esqueceu-se da palavra-passe? <Link to="/forgot-password">Recuperar Palavra-passe</Link></p>
+                <p>Esqueceu-se da palavra-passe? <Link to="/recover">Recuperar Palavra-passe</Link></p>
             </form>
         </div>
     );
