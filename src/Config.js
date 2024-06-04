@@ -1,7 +1,6 @@
 const config = {
-    token:
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NTlhNzc2ZmVlZDM4MWI4ZTJjNTU4OCIsInNjb3BlcyI6WyJhZG1pbiJdLCJpYXQiOjE3MTczNjM3MTQsImV4cCI6MTcxNzQ1MDExNH0.1Pn7YAvIvIJuCetgu2AOyZhgXW_mPNpfKdza7Zi85Nw",
-  };
-  
-  export default config;
-  
+  token:
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZXMiOlsiYWRtaW4iXSwiaWF0IjoxNzE3NDQwOTY1LCJleHAiOjE3MTc1MjczNjV9.R_aSYX_i7h2pabCUklAjBrIAGGkFOUoTzillDR9grfI",
+};
+
+export default config;

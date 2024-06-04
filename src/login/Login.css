@@ -11,7 +11,7 @@
   .login-page h1 {
     font-size: 2.5em;
     margin-bottom: 1em;
-    color: #b56576; /* Cor rosa para o título */
+    color: #ffffff; /* Cor rosa para o título */
   }
   
   .login-form {
@@ -22,12 +22,13 @@
     padding: 2em;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra para a caixa de diálogo */
-    background-color: #fff; /* Fundo branco para a caixa de diálogo */
+    background-color: #36692aca; /* Fundo branco para a caixa de diálogo */
+   
   }
   
   .login-form input {
     padding: 0.5em;
-    border: 1px solid #ddd;
+    border: 1px solid #ffffff;;
     border-radius: 5px;
   }
   
@@ -35,16 +36,29 @@
     padding: 0.5em;
     border: none;
     border-radius: 5px;
-    background-color: #b56576; /* Cor rosa para o botão */
-    color: #fff;
+    background-color:#ffffff; /* Cor rosa para o botão */
+    color: #000000;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
   
   .login-form button:hover {
-    background-color: #b56576; /* Cor rosa mais escura para o hover do botão */
+    background-color:#ffffff; /* Cor rosa mais escura para o hover do botão */
   }
   
   .login-form .error-message {
-    color: #ff0000;
+    background-color: #36692a;
+    padding: 0.5em;
+    color: #000000;
+    font-weight: bold;
+  }
+
+  .RecuperarPassword {
+    margin-top: -4px;
+    color: #000;
+  }
+
+  .CriarConta {
+    margin-top: -4px;
+    color: #000;
   }

@@ -46,5 +46,11 @@
   }
   
   .error-message {
-    color: #ff0000;
+    background-color: #36692a;
+    color: #000000;
+  }
+
+  .IniciarSessao {
+    margin-top: -4px;
+    color: #000;
   }

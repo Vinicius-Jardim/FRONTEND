@@ -15,7 +15,7 @@ import PasswordReset from './users/PasswordReset';
 function App() {
   return (
     <div className="App">
-      
+      <Header/>
       <main>
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -27,7 +27,6 @@ function App() {
           <Route path="/reset/:token" element={<PasswordReset />} />
 
         </Routes>
-        
       </main>
     </div>
   );
