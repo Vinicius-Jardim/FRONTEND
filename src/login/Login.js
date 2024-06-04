@@ -55,13 +55,18 @@ function LoginPage() {
         />
         <h6 className="RecuperarPassword">
           Esqueceu-se da palavra-passe?{" "}
-          <Link className="RecuperarPassword" to="/forgot-password">Recuperar Palavra-passe</Link>
+          <Link className="RecuperarPassword" to="/recover">
+            Recuperar Palavra-passe
+          </Link>
         </h6>
         <button type="button" className="buttonEntrar" onClick={handleLogin}>
           Entrar
         </button>
         <h6 className="CriarConta">
-          Não tens uma conta? <Link className="CriarConta" to="/register">Criar conta</Link>
+          Não tens uma conta?{" "}
+          <Link className="CriarConta" to="/register">
+            Criar conta
+          </Link>
         </h6>
         {errorMessage && <p className="error-message">{errorMessage}</p>}
       </form>

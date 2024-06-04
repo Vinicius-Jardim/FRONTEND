@@ -9,13 +9,9 @@ import Register from './users/Register';
 import PasswordRecovery from './users/PasswordRecovery';
 import PasswordReset from './users/PasswordReset';
 
-
-
-
 function App() {
   return (
     <div className="App">
-      <Header/>
       <main>
         <Routes>
           <Route path="/" element={<HomePage />} />
