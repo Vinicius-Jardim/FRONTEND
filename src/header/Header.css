@@ -1,4 +1,27 @@
 .css-hyum1k-MuiToolbar-root {
-  min-height: 64px;
-  background-color: #36692a;
+  background-color: #346c51;
+  height: 10vh;
+}
+
+:where(.css-dev-only-do-not-override-3rel02).ant-pagination
+  .ant-pagination-item-active:hover
+  a {
+  color: #346c51;
+}
+
+.logo {
+  height: 9vh;
+  width: 9%;
+}
+
+.menu-icon {
+  color: #d0d6b5;
+}
+
+.search-icon {
+  color: #d0d6b5;
+}
+
+.account-icon {
+  color: #d0d6b5;
 }

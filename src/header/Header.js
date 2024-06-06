@@ -15,7 +15,8 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import './Header.css';
+import "./Header.css";
+import logo from "../assets/logo.jpg";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -162,23 +163,16 @@ export default function PrimarySearchAppBar() {
           <IconButton
             size="large"
             edge="start"
-            color="inherit"
+            color="#D0D6B5"
             aria-label="open drawer"
             sx={{ mr: 2 }}
           >
-            <MenuIcon />
+            <MenuIcon className="menu-icon" />
           </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
-          >
-            MUI
-          </Typography>
+          <img className="logo" src={logo} />
           <Search>
             <SearchIconWrapper>
-              <SearchIcon />
+              <SearchIcon className="search-icon" />
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search…"
@@ -188,7 +182,6 @@ export default function PrimarySearchAppBar() {
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton
-              size="large"
               edge="end"
               aria-label="account of current user"
               aria-controls={menuId}
@@ -196,7 +189,7 @@ export default function PrimarySearchAppBar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle />
+              <AccountCircle className="account-icon" />
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>

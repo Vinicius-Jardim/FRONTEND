@@ -3,7 +3,7 @@ import "./Products.css";
 import config from "../Config";
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import Header from "../header/Header";
+import HeaderCopy from "../header/Header copy";
 import ProductTable from "./ProductTable";
 
 const Products = () => {
@@ -39,7 +39,7 @@ const Products = () => {
 
   return (
     <>
-      <Header />
+      <HeaderCopy />
       <div className="player-container">
         <ProductTable url={location} />
       </div>

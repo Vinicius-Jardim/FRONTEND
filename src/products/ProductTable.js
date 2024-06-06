@@ -29,6 +29,11 @@ const ProductTable = (props) => {
 
   const columns = [
     {
+      title: "imagem",
+      dataIndex: "imagem",
+      key: "imagem",
+    },
+    {
       title: "title",
       dataIndex: "titulo",
       key: "titulo",
