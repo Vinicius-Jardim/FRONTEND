@@ -20,7 +20,7 @@ const Header = () => {
         <IconButton edge="start" color="inherit" aria-label="menu">
           <MenuIcon />
         </IconButton>
-        <img src={logo} alt="Logo" className="logo" />
+        <img src={logo} alt="Logo" className="logo"  />
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           The GreenHouse
         </Typography>

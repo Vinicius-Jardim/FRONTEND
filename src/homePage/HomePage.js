@@ -5,7 +5,7 @@ import logoHP from "../assets/logo.png";
 const HomePage = () => {
   return (
     <div className="home-content">
-      <img className="logoHP" src={logoHP} />
+      <img className="logoHP" src={logoHP} alt="" />
       <Link to="/login" className="welcome-link">
         W e l c o m e !
       </Link>

@@ -25,3 +25,9 @@
 .account-icon {
   color: #d0d6b5;
 }
+
+img {
+  vertical-align: middle;
+  border-style: none;
+  margin-top: 1px;
+}
