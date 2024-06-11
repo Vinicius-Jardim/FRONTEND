@@ -21,9 +21,10 @@ const ProductsDetails = () => {
         .then((response) => {
           console.log("Response data:", response); // Log dos dados da resposta
 
-          const { auth, product } = response;
+          const product = response;
 
-          if (auth) {
+          if (product) {
+            console.log("Product details:", product); // Log dos detalhes do produto
             setProduct(product);
             setLoading(false);
           }
@@ -50,7 +51,7 @@ const ProductsDetails = () => {
       <HeaderCopy />
       <h2>{product.titulo}</h2>
       <p>Em Stock: {product.stock}</p>
-      {product.preço} €<p>{productId.descrição} </p>
+      {product.preço} €<p>{product.descrição} </p>
     </div>
   );
 };
