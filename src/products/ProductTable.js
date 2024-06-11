@@ -64,7 +64,7 @@ const ProductTable = ({ url }) => {
   };
 
   useEffect(() => {
-    fetchApi(data.pagination.pageSize, data.pagination.current, query); // Use o estado da consulta aqui
+    fetchApi(data.pagination.pageSize, data.pagination.current, query); // estado da consulta aqui
 
     return () =>
       setData({
@@ -74,10 +74,10 @@ const ProductTable = ({ url }) => {
           pageSize: 8,
         },
       });
-  }, [query]); // Adicione a dependência de consulta aqui
+  }, [query]); // A dependência de consulta aqui
 
   const handlePaginationChange = (page, pageSize) => {
-    fetchApi(pageSize, page, query); // Use o estado da consulta aqui
+    fetchApi(pageSize, page, query); // estado da consulta aqui
   };
 
   const { products, pagination } = data;
