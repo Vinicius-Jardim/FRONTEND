@@ -31,3 +31,7 @@ img {
   border-style: none;
   margin-top: 1px;
 }
+
+.search-input {
+  color: black;
+}

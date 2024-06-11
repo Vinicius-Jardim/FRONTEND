@@ -1,4 +1,3 @@
-// src/components/Header.js
 import React from "react";
 import {
   AppBar,
@@ -12,6 +11,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import "./Header.css";
 import logo from "../assets/logo.png";
+import SearchBar from "../products/search";
+
 
 const Header = () => {
   return (

@@ -3,9 +3,11 @@ import config from "../Config";
 import qs from "query-string";
 import { Card, Row, Col, Pagination } from "antd";
 import { Link } from "react-router-dom";
+import SearchBar from "./search";
 
-const ProductTable = (props) => {
+const ProductTable = ({ url }) => {
   const [loading, setLoading] = useState(true);
+  const [query, setQuery] = useState(''); // Adicione este estado
   const [data, setData] = useState({
     products: [],
     pagination: {
@@ -16,18 +18,18 @@ const ProductTable = (props) => {
   });
 
   function getCurrentPage() {
-    const queryParams = qs.parse(props.url.search);
+    const queryParams = qs.parse(url.search);
     const current = queryParams.current;
-    return current ? Number(current) : 1;
+    return isNaN(current) ? 1 : Number(current);
   }
 
   function getPageSize() {
-    const queryParams = qs.parse(props.url.search);
+    const queryParams = qs.parse(url.search);
     const pageSize = queryParams.pageSize;
-    return pageSize ? Number(pageSize) : 8;
+    return isNaN(pageSize) ? 8 : Number(pageSize);
   }
 
-  const fetchApi = (pageSize, current) => {
+  const fetchApi = (pageSize, current, query) => {
     const url =
       "http://127.0.0.1:3000/store/products?" +
       new URLSearchParams({
@@ -44,21 +46,25 @@ const ProductTable = (props) => {
         const auth = response.auth;
 
         if (auth) {
+          // Filtrar os produtos para mostrar apenas aqueles que correspondem à consulta
+          const filteredProducts = products.filter(product => product.titulo.toLowerCase().includes(query.toLowerCase()));
+
           setData({
-            products,
+            products: filteredProducts,
             pagination: {
               current: current || 1,
               pageSize: pagination.pageSize || 8,
-              total: pagination.total || 4,
+              total: isNaN(pagination.total) ? 0 : Number(pagination.total),
             },
           });
+          console.log(data)
           setLoading(false);
         }
       });
   };
 
   useEffect(() => {
-    fetchApi(data.pagination.pageSize, data.pagination.current);
+    fetchApi(data.pagination.pageSize, data.pagination.current, query); // Use o estado da consulta aqui
 
     return () =>
       setData({
@@ -68,21 +74,22 @@ const ProductTable = (props) => {
           pageSize: 8,
         },
       });
-  }, []);
+  }, [query]); // Adicione a dependência de consulta aqui
 
   const handlePaginationChange = (page, pageSize) => {
-    fetchApi(pageSize, page);
+    fetchApi(pageSize, page, query); // Use o estado da consulta aqui
   };
 
   const { products, pagination } = data;
 
   return (
     <>
+      <SearchBar setData={setData} setQuery={setQuery} /> 
+
       <Row gutter={[16, 16]}>
-        {products.map((product) => (
+        {(products ?? []).map((product) => (
           <Col className="card" key={product._id} xs={24} sm={12} md={8} lg={6}>
             <Link to={`/products/${product._id}`}>
-              {" "}
               <Card
                 title={product.titulo}
                 hoverable
@@ -97,9 +104,9 @@ const ProductTable = (props) => {
         ))}
       </Row>
       <Pagination
-        current={pagination.current}
-        pageSize={pagination.pageSize}
-        total={pagination.total}
+        current={pagination?.current}
+        pageSize={pagination?.pageSize}
+        total={pagination?.total}
         onChange={handlePaginationChange}
         style={{ marginTop: 16, textAlign: "center" }}
       />
