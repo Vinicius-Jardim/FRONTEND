@@ -3,6 +3,8 @@ import "./ProductsDetails.css";
 import config from "../../Config";
 import { useParams, Navigate } from "react-router-dom";
 import HeaderCopy from "../../header/Header copy";
+import StarRoundedIcon from "@mui/icons-material/StarRounded";
+import { Grid, Stack } from "@mui/material";
 
 const ProductsDetails = () => {
   const { productId } = useParams();
@@ -47,12 +49,22 @@ const ProductsDetails = () => {
   }
 
   return (
-    <div>
+    <>
       <HeaderCopy />
-      <h2>{product.titulo}</h2>
-      <p>Em Stock: {product.stock}</p>
-      {product.preço} €<p>{product.descrição} </p>
-    </div>
+      <Stack direction="row" spacing={10} padding={5}>
+        <img alt={product.image} src={product.imagem} />
+
+        <div>
+          <h2>{product.titulo}</h2>
+          <p>Em Stock: {product.stock}</p>
+          <p>{product.preço} €</p>
+          <p>{product.descrição}</p>
+          <p>
+            {product.classificação} <StarRoundedIcon></StarRoundedIcon>
+          </p>
+        </div>
+      </Stack>
+    </>
   );
 };
 

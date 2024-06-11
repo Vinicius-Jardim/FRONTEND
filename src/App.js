@@ -19,11 +19,13 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/login" element={<Login />} />
+
           <Route path="/register" element={<Register />} />
           <Route path="/recover" element={<PasswordRecovery />} />
           <Route path="/reset/:token" element={<PasswordReset />} />
           <Route path="/products/:productId" element={<ProductsDetails />} />
         </Routes>
+       
       </main>
     </div>
   );

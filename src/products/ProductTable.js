@@ -3,6 +3,9 @@ import config from "../Config";
 import qs from "query-string";
 import { Card, Row, Col, Pagination } from "antd";
 import { Link } from "react-router-dom";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import Cart from "../header/cart/cart";
+
 
 const ProductTable = (props) => {
   const [loading, setLoading] = useState(true);
@@ -93,9 +96,13 @@ const ProductTable = (props) => {
                 <p>Stock: {product.stock}</p>
               </Card>
             </Link>
+            <button className="addCar">
+              <ShoppingCartIcon />
+            </button>
           </Col>
         ))}
       </Row>
+
       <Pagination
         current={pagination.current}
         pageSize={pagination.pageSize}
@@ -103,6 +110,8 @@ const ProductTable = (props) => {
         onChange={handlePaginationChange}
         style={{ marginTop: 16, textAlign: "center" }}
       />
+
+      <Cart />
     </>
   );
 };

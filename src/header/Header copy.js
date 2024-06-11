@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import "./Header.css";
 import logo from "../assets/logo.png";
 
@@ -20,13 +21,16 @@ const Header = () => {
         <IconButton edge="start" color="inherit" aria-label="menu">
           <MenuIcon />
         </IconButton>
-        <img src={logo} alt="Logo" className="logo"  />
+        <img src={logo} alt="Logo" className="logo" />
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           The GreenHouse
         </Typography>
         <Box sx={{ display: "flex", gap: 2 }}>
           <Button color="inherit">Home </Button>
           <Button color="inherit"> About us</Button>
+          <IconButton color="inherit">
+            <ShoppingCartIcon />
+          </IconButton>
           <IconButton color="inherit">
             <AccountCircle />
           </IconButton>
