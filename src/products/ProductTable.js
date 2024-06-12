@@ -7,7 +7,8 @@ import SearchBar from "./search";
 
 const ProductTable = ({ url }) => {
   const [loading, setLoading] = useState(true);
-  const [query, setQuery] = useState(''); // Adicione este estado
+  const [query, setQuery] = useState(''); 
+  const [sortBy, setSortBy] = useState('');
   const [data, setData] = useState({
     products: [],
     pagination: {
@@ -29,12 +30,13 @@ const ProductTable = ({ url }) => {
     return isNaN(pageSize) ? 8 : Number(pageSize);
   }
 
-  const fetchApi = (pageSize, current, query) => {
+  const fetchApi = (pageSize, current, query, sortBy) => {
     const url =
       "http://127.0.0.1:3000/store/products?" +
       new URLSearchParams({
         limit: pageSize,
-        skip: (current - 1) * pageSize,
+        skip: (current - 1), //* pageSize,
+        sortBy: sortBy
       });
 
     fetch(url, {
@@ -64,7 +66,7 @@ const ProductTable = ({ url }) => {
   };
 
   useEffect(() => {
-    fetchApi(data.pagination.pageSize, data.pagination.current, query); // estado da consulta aqui
+    fetchApi(data.pagination.pageSize, data.pagination.current, query, sortBy); // estado da consulta aqui
 
     return () =>
       setData({
@@ -74,17 +76,33 @@ const ProductTable = ({ url }) => {
           pageSize: 8,
         },
       });
-  }, [query]); // A dependência de consulta aqui
+  }, [query, sortBy]); // A dependência de consulta aqui
 
   const handlePaginationChange = (page, pageSize) => {
-    fetchApi(pageSize, page, query); // estado da consulta aqui
+    fetchApi(pageSize, page, query, sortBy); // estado da consulta aqui
   };
 
   const { products, pagination } = data;
 
+  //sort by
+  const handleSortChange = (event) => {
+    setSortBy(event.target.value);
+    fetchApi(data.pagination.pageSize, data.pagination.current, query, event.target.value);
+  };
+
   return (
     <>
       <SearchBar setData={setData} setQuery={setQuery} /> 
+      <div>
+      <select value={sortBy} onChange={handleSortChange}>
+        <option value="">Ordenar por</option>
+        <option value="asc">Preço: Menor para Maior</option>
+        <option value="desc">Preço: Maior para Menor</option>
+        <option value="classification_asc">Classificação: Menor para Maior</option>
+        <option value="classification_desc">Classificação: Maior para Menor</option>
+      </select>
+    
+    </div>
 
       <Row gutter={[16, 16]}>
         {(products ?? []).map((product) => (

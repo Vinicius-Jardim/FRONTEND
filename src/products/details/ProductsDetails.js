@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./ProductsDetails.css";
 import config from "../../Config";
 import { useParams, Navigate } from "react-router-dom";
-import HeaderCopy from "../../header/Header copy";
+import Header from "../../header/Header";
 
 const ProductsDetails = () => {
   const { productId } = useParams();
@@ -48,7 +48,7 @@ const ProductsDetails = () => {
 
   return (
     <div>
-      <HeaderCopy />
+      <Header />
       <h2>{product.titulo}</h2>
       <p>Em Stock: {product.stock}</p>
       {product.preço} €<p>{product.descrição} </p>

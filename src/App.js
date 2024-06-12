@@ -10,6 +10,8 @@ import PasswordRecovery from "./users/PasswordRecovery";
 import PasswordReset from "./users/PasswordReset";
 import ProductsDetails from "./products/details/ProductsDetails";
 import { useState } from "react";
+import Account from "./users/Account";
+
 
 function App() {
 
@@ -46,6 +48,7 @@ function App() {
           <Route path="/recover" element={<PasswordRecovery />} />
           <Route path="/reset/:token" element={<PasswordReset />} />
           <Route path="/products/:productId" element={<ProductsDetails />} />
+          <Route path="/account" element={<Account />} />
         </Routes>
       </main>
     </div>
