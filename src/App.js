@@ -10,12 +10,13 @@ import PasswordRecovery from "./users/PasswordRecovery";
 import PasswordReset from "./users/PasswordReset";
 import ProductsDetails from "./products/details/ProductsDetails";
 import { useState } from "react";
-import Account from "./users/Account";
+import Account from "./users/Account/Account";
+import ChangePassword from "./users/ChangePassword";
 
 
 function App() {
 
-  const [products, setProducts] = useState({
+  const [ setProducts] = useState({
     products: [],
     pagination: {
       current: 1,
@@ -49,6 +50,7 @@ function App() {
           <Route path="/reset/:token" element={<PasswordReset />} />
           <Route path="/products/:productId" element={<ProductsDetails />} />
           <Route path="/account" element={<Account />} />
+          <Route path="/changepassword" element={<ChangePassword />} />
         </Routes>
       </main>
     </div>
