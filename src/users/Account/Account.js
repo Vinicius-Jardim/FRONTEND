@@ -15,7 +15,7 @@ const Account = () => {
       <div className="container">
         {user ? (
           <>
-            <h2 className="title">Bem-vindo, {user.name}!</h2>
+            <h2 className="title">Bem-vindo, {user.name}!</h2> {/* Ajuste aqui para user.name */}
             <div className="button-container">
               <button className="button">
                 <Link to="/changepassword">

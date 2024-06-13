@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./Login.css";
-import { useAuth } from "../authcontext/AuthContext"; 
+import { useAuth } from "../authcontext/AuthContext";
 
 function LoginPage() {
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState(""); // Adicione esta linha
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ function LoginPage() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await login(username, password);
+      await login(username, password); // Altere 'name' para 'username'
       navigate("/");
     } catch (error) {
       if (error.response && error.response.data && error.response.data.message) {
@@ -23,7 +23,10 @@ function LoginPage() {
         setErrorMessage("Ocorreu um erro ao fazer login");
       }
     }
-  }
+  };
+
+  
+
 
   return (
     <div className="login-page">

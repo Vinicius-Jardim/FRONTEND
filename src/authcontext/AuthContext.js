@@ -51,14 +51,14 @@ export const AuthProvider = ({ children }) => {
     };
   }, []);
 
-  const login = async (email, password) => {
+  const login = async (name, password) => {
     try {
       const response = await fetch('http://127.0.0.1:3000/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ name, password })
       });
       const data = await response.json();
       const { token } = data;
@@ -69,12 +69,13 @@ export const AuthProvider = ({ children }) => {
         }
       });
       const userData = await userResponse.json();
-      setUser({ ...userData.decoded });
+      setUser({ ...userData.decoded, name: userData.decoded.name });
       resetInactivityTimer();
     } catch (error) {
       throw error;
     }
   };
+  
 
   const logout = () => {
     localStorage.removeItem('token');
