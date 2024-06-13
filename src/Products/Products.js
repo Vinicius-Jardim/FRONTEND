@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import HeaderCopy from "../header/Header copy";
 import ProductTable from "./ProductTable";
+import Footer from "../footer/footer";
 
 const Products = () => {
   let Navigate = useNavigate();
@@ -43,6 +44,8 @@ const Products = () => {
       <div className="player-container">
         <ProductTable url={location} />
       </div>
+
+      <Footer />
     </>
   );
 };
