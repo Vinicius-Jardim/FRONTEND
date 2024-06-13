@@ -2,47 +2,35 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./Login.css";
+import { useAuth } from "../authcontext/AuthContext"; 
 
 function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  const { login } = useAuth();
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
     try {
-      const response = await fetch("http://127.0.0.1:3000/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name: username, password: password }),
-      });
-
-      if (response.status === 200) {
-        const data = await response.json();
-        localStorage.setItem("token", data.token);
-        navigate("/products");
-      } else {
-        const errorData = await response.json();
-        setErrorMessage(
-          errorData.message ||
-            "Erro interno do servidor. Por favor, tente novamente mais tarde ou troque de usuário."
-        );
-      }
+      await login(username, password);
+      navigate("/");
     } catch (error) {
-      setErrorMessage(
-        "Erro interno do servidor. Por favor, tente novamente mais tarde ou troque de usuário."
-      );
+      if (error.response && error.response.data && error.response.data.message) {
+        setErrorMessage(error.response.data.message);
+      } else {
+        setErrorMessage("Ocorreu um erro ao fazer login");
+      }
     }
-  };
+  }
 
   return (
     <div className="login-page">
-      <form className="login-form">
+      <form className="login-form" onSubmit={handleLogin}>
         <h1>Login</h1>
         <input
-          type="username"
+          type="text"
           placeholder="Nome de usuário"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
@@ -59,7 +47,7 @@ function LoginPage() {
             Recuperar Palavra-passe
           </Link>
         </h6>
-        <button type="button" className="buttonEntrar" onClick={handleLogin}>
+        <button type="submit" className="buttonEntrar">
           Entrar
         </button>
         <h6 className="CriarConta">

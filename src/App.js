@@ -12,6 +12,7 @@ import ProductsDetails from "./products/details/ProductsDetails";
 import { useState } from "react";
 import Account from "./users/Account/Account";
 import ChangePassword from "./users/ChangePassword";
+import { AuthProvider } from "./authcontext/AuthContext";
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
   return (
     <div className="App">
       <main>
+        <AuthProvider>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/products" element={<Products />} />
@@ -52,6 +54,7 @@ function App() {
           <Route path="/account" element={<Account />} />
           <Route path="/changepassword" element={<ChangePassword />} />
         </Routes>
+        </AuthProvider>
       </main>
     </div>
   );
