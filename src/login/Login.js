@@ -9,6 +9,7 @@ function LoginPage() {
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
+<<<<<<< Updated upstream
     const handleLogin = async () => {
         try {
             const response = await fetch('http://127.0.0.1:3000/auth/login', {
@@ -31,6 +32,21 @@ function LoginPage() {
             setErrorMessage('Erro interno do servidor. Por favor, tente novamente mais tarde ou troque de usuário.');
         }
     };
+=======
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      await login(username, password); // Altere 'name' para 'username'
+      navigate("/account");
+    } catch (error) {
+      if (error.response && error.response.data && error.response.data.message) {
+        setErrorMessage(error.response.data.message);
+      } else {
+        setErrorMessage("Ocorreu um erro ao fazer login");
+      }
+    }
+  };
+>>>>>>> Stashed changes
 
     return (
         <div className="login-page">
