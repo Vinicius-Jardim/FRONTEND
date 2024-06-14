@@ -51,7 +51,7 @@ const Gestao = () => {
       'http://127.0.0.1:3000/store/products?' +
       new URLSearchParams({
         limit: pageSize,
-        skip: (current - 1),
+        skip: (current - 1) * pageSize,
         q: query,
       });
 
@@ -90,7 +90,7 @@ const Gestao = () => {
 
   const handleSearch = (query) => {
     setSearchTerm(query);
-    fetchProducts(pagination.pageSize, 1, query); // Ao pesquisar, reiniciamos na primeira página
+    fetchProducts(pagination.pageSize, pagination.current, query);
   };
 
   const handleModalOk = async () => {
@@ -183,11 +183,10 @@ const Gestao = () => {
         <div className="search-bar">
           <input
             type="text"
-            placeholder="Pesquisar por título..."
+            placeholder="Pesquisar produtos"
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={(e) => handleSearch(e.target.value)}
           />
-          <button onClick={() => handleSearch(searchTerm)}>Pesquisar</button>
         </div>
         <button onClick={() => setModalVisible(true)}>Adicionar Produto</button>
         <table className="gestao-table">

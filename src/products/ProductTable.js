@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import config from "../Config";
+
 import qs from "query-string";
 import { Card, Row, Col, Pagination } from "antd";
 import { Link } from "react-router-dom";
@@ -39,9 +39,12 @@ const ProductTable = ({ url }) => {
         sortBy: sortBy
       });
 
-    fetch(url, {
-      headers: { Accept: "application/json", "x-access-token": config.token },
-    })
+      fetch(url, {
+        headers: {
+          Accept: 'application/json',
+          'x-access-token': localStorage.getItem('token'),
+        },
+      })
       .then((response) => response.json())
       .then((response) => {
         const { products = [], pagination } = response.products;
