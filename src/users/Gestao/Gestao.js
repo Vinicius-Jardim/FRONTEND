@@ -44,9 +44,11 @@ const Gestao = () => {
       });
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewProductData({ ...newProductData, [name]: value });
+  const handleInputChange = (event) => {
+    setNewProductData({
+      ...newProductData,
+      [event.target.name]: event.target.value,
+    });
   };
 
   const handleModalOk = async () => {
@@ -71,8 +73,57 @@ const Gestao = () => {
     }
   };
 
+ //Update product
+const handleUpdate = async (product) => {
+  try {
+    const response = await fetch(`http://127.0.0.1:3000/store/products/` + product._id, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': localStorage.getItem('token'),
+      },
+      body: JSON.stringify(product),
+    }); 
+    const data = await response.json();
+    if (response.ok) {
+      setProducts(products.map(p => p._id === product._id ? data : p));
+      setModalVisible(false);
+    } else {
+      console.error('Erro ao atualizar o produto:', data.error);
+    }
+  } catch (error) {
+    console.error('Erro ao comunicar com o servidor:', error);
+  }
+};
+
+//Delete product
+const handleDelete = async (product) => {
+  try {
+    const response = await fetch(`http://127.0.0.1:3000/store/products/` + product._id, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': localStorage.getItem('token'),
+      },
+    });
+    const data = await response.json();
+    if (response.ok) {
+      setProducts(products.filter((p) => p._id !== product._id));
+    } else {
+      console.error('Erro ao excluir o produto:', data.error);
+    }
+  } catch (error) {
+    console.error('Erro ao comunicar com o servidor:', error);
+  }
+};
+
   const handleModalCancel = () => {
     setModalVisible(false);
+  };
+
+  const handleUpdateClick = (product) => {
+    setNewProductData(product);
+    setModalVisible(true);
   };
 
   if (loading) {
@@ -81,53 +132,50 @@ const Gestao = () => {
 
   return (
     <>
-    <Header />
-    <div>
-      <h2>Gestão de Produtos</h2>
       <div>
-        <h3>Lista de Produtos:</h3>
+        <h2>Gestão de Produtos</h2>
+        <button onClick={() => setModalVisible(true)}>Adicionar Produto</button>
         <ul>
           {products.map((product) => (
             <li key={product._id}>
               {product.titulo} - R$ {product.preço}
+              <button onClick={() => handleUpdateClick(product)}>Atualizar</button>
+              <button onClick={() => handleDelete(product)}>Excluir</button>
             </li>
           ))}
         </ul>
       </div>
 
-      <button onClick={() => setModalVisible(true)}>Adicionar Produto</button>
-
       <Modal
-        title="Adicionar Novo Produto"
+        title={newProductData._id ? "Atualizar Produto" : "Adicionar Novo Produto"}
         visible={modalVisible}
-        onOk={handleModalOk}
+        onOk={newProductData._id ? () => handleUpdate(newProductData) : handleModalOk}
         onCancel={handleModalCancel}
       >
-      <form>
-        <label>Título:</label>
-        <input type="text" name="titulo" value={newProductData.titulo} onChange={handleInputChange} />
-        <label>Descrição</label>
-        <input type="text" name="descrição" value={newProductData.descrição} onChange={handleInputChange} />
-        <label>Categoria:</label>
-        <input type="text" name="categoria" value={newProductData.categoria} onChange={handleInputChange} />
-        <label>Stock:</label>
-        <input type="text" name="stock" value={newProductData.stock} onChange={handleInputChange} />
-        <label>classificação:</label>
-        <input type="text" name="classificação" value={newProductData.classificação} onChange={handleInputChange} />
-        <label>minimumQuantity:</label>
-        <input type="text" name="minimumQuantity" value={newProductData.minimumQuantity} onChange={handleInputChange} />
-        <label>Preço:</label>
-        <input type="number" name="preço" value={newProductData.preço} onChange={handleInputChange} />
-        <label>imagem:</label>
-        <input type="text" name="imagem" value={newProductData.imagem} onChange={handleInputChange} />
-      </form>
+        <form>
+          <label>Titulo:</label>
+          <input type="text" name="titulo" value={newProductData.titulo} onChange={handleInputChange} />
+          <label>Categoria:</label>
+          <input type="text" name="categoria" value={newProductData.categoria} onChange={handleInputChange} />
+          <label>Descrição:</label>
+          <input type="text" name="descrição" value={newProductData.descrição} onChange={handleInputChange} />
+          <label>Preço:</label>
+          <input type="number" name="preço" value={newProductData.preço} onChange={handleInputChange} />
+          <label>Classificação:</label>
+          <input type="text" name="classificação" value={newProductData.classificação} onChange={handleInputChange} />
+          <label>Stock:</label>
+          <input type="text" name="stock" value={newProductData.stock} onChange={handleInputChange} />
+          <label>Quantidade mínima:</label>
+          <input type="text" name="minimumQuantity" value={newProductData.minimumQuantity} onChange={handleInputChange} />
+          <label>Imagem:</label>
+          <input type="text" name="imagem" value={newProductData.imagem} onChange={handleInputChange} />
+        </form>
       </Modal>
-      
+
       <div>
         <h2>Gestão de Pedidos</h2>
         <Orders />
       </div>
-    </div>
     </>
   );
 };
