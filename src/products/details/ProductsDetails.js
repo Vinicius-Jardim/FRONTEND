@@ -12,7 +12,7 @@ const ProductsDetails = () => {
   useEffect(() => {
     if (productId) {
       fetch(`http://127.0.0.1:3000/store/products/${productId}`, {
-        headers: { Accept: "application/json", "x-access-token": config.token },
+        headers: { Accept: "application/json", "x-access-token": localStorage.getItem('token') },
       })
         .then((response) => {
           console.log("Response status:", response.status); // Log do status da resposta
@@ -38,7 +38,7 @@ const ProductsDetails = () => {
 
   console.log("Product ID:", productId); // Log do ID do produto
 
-  if (!config.token) {
+  if (!localStorage.getItem('token')) {
     return <Navigate to="/" />;
   }
 
