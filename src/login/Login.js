@@ -14,8 +14,8 @@ function LoginPage() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await login(username, password); // Altere 'name' para 'username'
-      navigate("/");
+      await login(username, password); 
+      navigate("/account");
     } catch (error) {
       if (error.response && error.response.data && error.response.data.message) {
         setErrorMessage(error.response.data.message);

@@ -83,7 +83,7 @@ export const AuthProvider = ({ children }) => {
     if (inactivityTimer) {
       clearTimeout(inactivityTimer);
     }
-    navigate('/');
+    navigate('/account');
   };
 
   return (

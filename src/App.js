@@ -13,6 +13,7 @@ import { useState } from "react";
 import Account from "./users/Account/Account";
 import ChangePassword from "./users/ChangePassword";
 import { AuthProvider } from "./authcontext/AuthContext";
+import Gestao from "./users/Gestao/Gestao";
 
 
 function App() {
@@ -53,6 +54,7 @@ function App() {
           <Route path="/products/:productId" element={<ProductsDetails />} />
           <Route path="/account" element={<Account />} />
           <Route path="/changepassword" element={<ChangePassword />} />
+          <Route path="/gestao" element={<Gestao />} />
         </Routes>
         </AuthProvider>
       </main>

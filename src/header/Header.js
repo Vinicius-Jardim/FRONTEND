@@ -144,7 +144,7 @@ export default function PrimarySearchAppBar() {
           <Button color="inherit" component={Link} to="/">
         Home
       </Button>
-            <Button color="inherit" component={Link} to="/home">Gestão</Button>
+            <Button color="inherit" component={Link} to="/gestao">Gestão</Button>
             <IconButton
               edge="end"
               aria-label="account of current user"
