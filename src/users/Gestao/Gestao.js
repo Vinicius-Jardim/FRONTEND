@@ -12,7 +12,6 @@ const Gestao = () => {
     classificação: '',
     stock: '',
     minimumQuantity: '',
-    replenishmentAlert: false,
     imagem: '',
   });
   const [products, setProducts] = useState([]);
@@ -105,18 +104,24 @@ const Gestao = () => {
         onOk={handleModalOk}
         onCancel={handleModalCancel}
       >
-        <form>
-          <label>Título:</label>
-          <input type="text" name="titulo" value={newProductData.titulo} onChange={handleInputChange} />
-
-          {/* Adicione campos adicionais conforme necessário */}
-          <label>Preço:</label>
-          <input type="number" name="preço" value={newProductData.preço} onChange={handleInputChange} />
-
-          {/* Exemplo de mais campos */}
-          {/* <label>Descrição:</label>
-          <textarea name="descrição" value={newProductData.descrição} onChange={handleInputChange} /> */}
-        </form>
+      <form>
+  <label>Título:</label>
+  <input type="text" name="titulo" value={newProductData.titulo} onChange={handleInputChange} />
+  <label>Descrição</label>
+  <input type="text" name="descrição" value={newProductData.descrição} onChange={handleInputChange} />
+  <label>Categoria:</label>
+  <input type="text" name="categoria" value={newProductData.categoria} onChange={handleInputChange} />
+  <label>Stock:</label>
+  <input type="text" name="stock" value={newProductData.stock} onChange={handleInputChange} />
+  <label>classificação:</label>
+  <input type="text" name="classificação" value={newProductData.classificação} onChange={handleInputChange} />
+  <label>minimumQuantity:</label>
+  <input type="text" name="minimumQuantity" value={newProductData.minimumQuantity} onChange={handleInputChange} />
+  <label>Preço:</label>
+  <input type="number" name="preço" value={newProductData.preço} onChange={handleInputChange} />
+  <label>imagem:</label>
+  <input type="text" name="imagem" value={newProductData.imagem} onChange={handleInputChange} />
+</form>
       </Modal>
     </div>
     </>
