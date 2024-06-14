@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'antd/lib/modal/Modal'; // Importe o modal do Ant Design ou outra biblioteca de sua escolha
 import Header from "../../header/Header";
+import Orders from '../../orders/Orders'; 
 
 const Gestao = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -15,31 +16,31 @@ const Gestao = () => {
     imagem: '',
   });
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true); // Adicionei para controlar o estado de carregamento
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchProducts(); // Carregar produtos ao montar o componente
+    fetchProducts();
   }, []);
 
   const fetchProducts = () => {
     fetch("http://127.0.0.1:3000/store/products", {
       headers: { 
         Accept: "application/json",
-        'x-access-token': localStorage.getItem('token'), // Inclui o token de acesso
+        'x-access-token': localStorage.getItem('token'),
       },
     })
       .then((response) => response.json())
       .then((response) => {
         if (response.auth && response.products) {
-          setProducts(response.products.products); // Atualiza a lista de produtos no estado local
+          setProducts(response.products.products);
         } else {
           console.error('Resposta inválida:', response);
         }
-        setLoading(false); // Marca o carregamento como completo
+        setLoading(false);
       })
       .catch((error) => {
         console.error('Erro ao buscar produtos:', error);
-        setLoading(false); // Marca o carregamento como completo mesmo em caso de erro
+        setLoading(false);
       });
   };
 
@@ -60,15 +61,13 @@ const Gestao = () => {
       });
       const data = await response.json();
       if (response.ok) {
-        setProducts([...products, data]); // Adiciona o novo produto à lista de produtos localmente
-        setModalVisible(false); // Fecha o modal após o sucesso
+        setProducts([...products, data]);
+        setModalVisible(false);
       } else {
         console.error('Erro ao criar o produto:', data.error);
-        // Lógica para lidar com erro
       }
     } catch (error) {
       console.error('Erro ao comunicar com o servidor:', error);
-      // Lógica para lidar com erro de rede ou outros erros
     }
   };
 
@@ -105,28 +104,32 @@ const Gestao = () => {
         onCancel={handleModalCancel}
       >
       <form>
-  <label>Título:</label>
-  <input type="text" name="titulo" value={newProductData.titulo} onChange={handleInputChange} />
-  <label>Descrição</label>
-  <input type="text" name="descrição" value={newProductData.descrição} onChange={handleInputChange} />
-  <label>Categoria:</label>
-  <input type="text" name="categoria" value={newProductData.categoria} onChange={handleInputChange} />
-  <label>Stock:</label>
-  <input type="text" name="stock" value={newProductData.stock} onChange={handleInputChange} />
-  <label>classificação:</label>
-  <input type="text" name="classificação" value={newProductData.classificação} onChange={handleInputChange} />
-  <label>minimumQuantity:</label>
-  <input type="text" name="minimumQuantity" value={newProductData.minimumQuantity} onChange={handleInputChange} />
-  <label>Preço:</label>
-  <input type="number" name="preço" value={newProductData.preço} onChange={handleInputChange} />
-  <label>imagem:</label>
-  <input type="text" name="imagem" value={newProductData.imagem} onChange={handleInputChange} />
-</form>
+        <label>Título:</label>
+        <input type="text" name="titulo" value={newProductData.titulo} onChange={handleInputChange} />
+        <label>Descrição</label>
+        <input type="text" name="descrição" value={newProductData.descrição} onChange={handleInputChange} />
+        <label>Categoria:</label>
+        <input type="text" name="categoria" value={newProductData.categoria} onChange={handleInputChange} />
+        <label>Stock:</label>
+        <input type="text" name="stock" value={newProductData.stock} onChange={handleInputChange} />
+        <label>classificação:</label>
+        <input type="text" name="classificação" value={newProductData.classificação} onChange={handleInputChange} />
+        <label>minimumQuantity:</label>
+        <input type="text" name="minimumQuantity" value={newProductData.minimumQuantity} onChange={handleInputChange} />
+        <label>Preço:</label>
+        <input type="number" name="preço" value={newProductData.preço} onChange={handleInputChange} />
+        <label>imagem:</label>
+        <input type="text" name="imagem" value={newProductData.imagem} onChange={handleInputChange} />
+      </form>
       </Modal>
+      
+      <div>
+        <h2>Gestão de Pedidos</h2>
+        <Orders />
+      </div>
     </div>
     </>
   );
 };
 
 export default Gestao;
-
