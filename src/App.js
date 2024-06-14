@@ -15,6 +15,7 @@ import ChangePassword from "./users/ChangePassword";
 import { AuthProvider } from "./authcontext/AuthContext";
 import Gestao from "./users/Gestao/Gestao";
 import Cart from "./cart/Cart";
+import Checkout from "./orders/Checkout/Checkout";
 
 
 function App() {
@@ -57,6 +58,7 @@ function App() {
           <Route path="/changepassword" element={<ChangePassword />} />
           <Route path="/gestao" element={<Gestao />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
         </AuthProvider>
       </main>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../authcontext/AuthContext';
+import './Cart.css'; // Importando o CSS
 
 const Cart = () => {
   const { user } = useAuth();
@@ -63,7 +64,7 @@ const Cart = () => {
 
   const calculateTotalPrice = () => {
     return cart.reduce((total, product) => {
-      return total + (product.preco * product.quantity);
+      return total + (product.preço * product.quantity);
     }, 0).toFixed(2);
   };
 
@@ -77,13 +78,13 @@ const Cart = () => {
         <div className="card">
           <div className="card-image">
             <Link to={`/produtos/${product._id}`} className="card-link">
-              <img src={`http://127.0.0.1:3001/${product.fotografia}`} alt={product.titulo} />
+              <img src={product.imagem} alt={product.titulo} />
             </Link>
           </div>
           <div className="card-content">
             <p className="card-title">{product.titulo}</p>
             <p className="card-description">{product.descricao}</p>
-            <p><strong>Preço:</strong> {product.preco}€</p>
+            <p><strong>Preço:</strong> {product.preço}€</p>
             <div className="quantity-controls">
               <button onClick={() => handleDecreaseQuantity(product._id)} className="btn-small yellow">-</button>
               <span>{product.quantity}</span>
@@ -102,7 +103,6 @@ const Cart = () => {
 
   return (
     <div>
-     
       <div className="container">
         <h4>Carrinho de Compras</h4>
         <div className="row">
@@ -112,11 +112,10 @@ const Cart = () => {
           <div className="total">
             <p>Total:</p>
             <p className="total-amount">{calculateTotalPrice()}€</p>
-            <button onClick={handlePurchase} className="btn-large green">Comprar</button>
+            <button onClick={handlePurchase} className="btn-large">Comprar</button>
           </div>
         )}
       </div>
-     
     </div>
   );
 };

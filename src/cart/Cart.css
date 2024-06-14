@@ -1,0 +1,120 @@
+/* Estilização geral do container */
+.container {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+/* Estilização dos itens do carrinho */
+.cart-item {
+    margin: 10px 0;
+    border: 1px solid #346c51;
+    border-radius: 5px;
+}
+
+/* Estilização do cartão de produto */
+.card {
+    background-color: #fff;
+    padding: 20px;
+}
+
+/* Estilização da imagem do produto */
+.card-image img {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+}
+
+/* Estilização do conteúdo do cartão */
+.card-content {
+    color: #346c51;
+}
+
+/* Título do produto */
+.card-title {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+/* Controles de quantidade */
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100px;
+    margin: 10px 0;
+}
+
+/* Botões de controle de quantidade */
+.quantity-controls button {
+    background-color: #346c51;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.quantity-controls button:hover {
+    background-color: #285641;
+}
+
+/* Seção de total */
+.total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #346c51;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.total-amount {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+/* Botão de compra */
+.btn-large {
+    background-color: #346c51;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-large:hover {
+    background-color: #285641;
+}
+
+/* Ajustes para layout responsivo */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cart-item {
+    flex: 1 0 21%; /* 4 itens por linha em grandes telas */
+    box-sizing: border-box;
+}
+
+@media (max-width: 1200px) {
+    .cart-item {
+        flex: 1 0 30%; /* 3 itens por linha em telas médias */
+    }
+}
+
+@media (max-width: 992px) {
+    .cart-item {
+        flex: 1 0 45%; /* 2 itens por linha em telas pequenas */
+    }
+}
+
+@media (max-width: 600px) {
+    .cart-item {
+        flex: 1 0 100%; /* 1 item por linha em telas muito pequenas */
+    }
+}

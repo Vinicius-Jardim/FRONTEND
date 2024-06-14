@@ -1,0 +1,37 @@
+/* Estilização geral do container */
+.checkout-container {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  /* Lista de produtos no checkout */
+  .checkout-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .checkout-list li {
+    background-color: #fff;
+    margin: 10px 0;
+    padding: 15px;
+    border: 1px solid #346c51;
+    border-radius: 5px;
+  }
+  
+  /* Botão de confirmação de encomenda */
+  .btn-large {
+    background-color: #346c51;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .btn-large:hover {
+    background-color: #285641;
+  }
+  
