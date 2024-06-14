@@ -35,3 +35,16 @@ img {
 .search-input {
   color: black;
 }
+
+.custom-toolbar {
+  background-color: #346c51;
+  height: 10vh;
+  min-height: 64px; /* Garante uma altura mínima em dispositivos menores */
+}
+
+.logo {
+  height: 8vh; /* Ajuste a altura do logo conforme necessário */
+  width: auto; /* Garante que a largura seja ajustada proporcionalmente */
+}
+
+/* Adicione outros estilos conforme necessário */

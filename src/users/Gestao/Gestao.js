@@ -6,6 +6,8 @@ import './Gestao.css';
 import { Card, Row, Col, Pagination } from "antd";
 import qs from 'query-string';
 import { useLocation } from 'react-router-dom';
+import AdminUsers from '../AdminUsers';
+
 
 const Gestao = () => {
   const location = useLocation();
@@ -88,10 +90,6 @@ const Gestao = () => {
     fetchProducts(pagination.pageSize, pagination.current, searchTerm);
   }, [pagination.pageSize, pagination.current, searchTerm]);
 
-  const handleSearch = (query) => {
-    setSearchTerm(query);
-    fetchProducts(pagination.pageSize, 1, query); // Ao pesquisar, reiniciamos na primeira página
-  };
 
   const handleModalOk = async () => {
     try {
@@ -187,7 +185,7 @@ const Gestao = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <button onClick={() => handleSearch(searchTerm)}>Pesquisar</button>
+         
         </div>
         <button onClick={() => setModalVisible(true)}>Adicionar Produto</button>
         <table className="gestao-table">
@@ -259,6 +257,7 @@ const Gestao = () => {
       <div>
         <h2>Gestão de Pedidos</h2>
         <Orders />
+        <AdminUsers />
       </div>
     </>
   );

@@ -116,9 +116,9 @@ const handleCreate = async (order) => {
                 <p className="loading">Carregando...</p>
             ) : (
                 <div className="orders-list">
-                    {orders.map((order) => (
-                        <Order key={order._id} order={order} onDelete={handleDelete} />
-                    ))}
+                    {Array.isArray(orders) ? orders.map((order) => (
+    <Order key={order._id} order={order} onDelete={handleDelete} />
+)) : null}
                 </div>
             )}
         </div>

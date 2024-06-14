@@ -9,24 +9,24 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import MoreIcon from "@mui/icons-material/MoreVert";
-import "./Header.css";
-import logo from "../assets/logo.jpg";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
-
-
-
-
+import MailIcon from "@mui/icons-material/Mail";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import logo from "../assets/logo.jpg";
+import MoreIcon from "@mui/icons-material/MoreVert";
+import Cart from "../cart/Cart"; // Importação do componente do carrinho
+import "./Header.css";
 
 export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [cartAnchorEl, setCartAnchorEl] = React.useState(null); // Estado para controlar o dropdown do carrinho
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const isCartOpen = Boolean(cartAnchorEl); // Verifica se o dropdown do carrinho está aberto
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -43,6 +43,14 @@ export default function PrimarySearchAppBar() {
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
+  };
+
+  const handleCartOpen = (event) => {
+    setCartAnchorEl(event.currentTarget);
+  };
+
+  const handleCartClose = () => {
+    setCartAnchorEl(null);
   };
 
   const menuId = "primary-search-account-menu";
@@ -62,12 +70,9 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      
-      <Link to="/account" style={{ textDecoration: 'none', color: 'inherit' }}>
-  <MenuItem onClick={handleMenuClose}>
-    My account
-  </MenuItem>
-</Link>
+      <MenuItem component={Link} to="/account" onClick={handleMenuClose}>
+        My account
+      </MenuItem>
     </Menu>
   );
 
@@ -89,7 +94,11 @@ export default function PrimarySearchAppBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+        <IconButton
+          size="large"
+          aria-label="show 4 new mails"
+          color="inherit"
+        >
           <Badge badgeContent={4} color="error">
             <MailIcon />
           </Badge>
@@ -112,7 +121,7 @@ export default function PrimarySearchAppBar() {
         <IconButton
           size="large"
           aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
+          aria-controls={menuId}
           aria-haspopup="true"
           color="inherit"
         >
@@ -126,7 +135,7 @@ export default function PrimarySearchAppBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar className="custom-toolbar"> {/* Adicione a classe custom-toolbar */}
           <IconButton
             size="large"
             edge="start"
@@ -140,11 +149,34 @@ export default function PrimarySearchAppBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             The GreenHouse
           </Typography>
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
-          <Button color="inherit" component={Link} to="/">
-        Home
-      </Button>
+          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+            <Button color="inherit" component={Link} to="/">Home</Button>
             <Button color="inherit" component={Link} to="/gestao">Gestão</Button>
+            {/* Ícone do carrinho com badge de quantidade de itens */}
+            <IconButton
+              aria-label="show shopping cart"
+              aria-controls="cart-menu"
+              aria-haspopup="true"
+              onClick={handleCartOpen}
+              color="inherit"
+            >
+              <Badge badgeContent={3} color="error">
+                <ShoppingCartIcon />
+              </Badge>
+            </IconButton>
+            {/* Dropdown do carrinho */}
+            <Menu
+              id="cart-menu"
+              anchorEl={cartAnchorEl}
+              keepMounted
+              open={isCartOpen}
+              onClose={handleCartClose}
+            >
+              <MenuItem>
+                <Cart />
+              </MenuItem>
+            </Menu>
+            {/* Ícone da conta de usuário */}
             <IconButton
               edge="end"
               aria-label="account of current user"
@@ -156,7 +188,7 @@ export default function PrimarySearchAppBar() {
               <AccountCircle />
             </IconButton>
           </Box>
-          <Box sx={{ display: { xs: "flex", md: "none" } }}>
+          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
               aria-label="show more"

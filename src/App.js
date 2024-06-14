@@ -14,6 +14,7 @@ import Account from "./users/Account/Account";
 import ChangePassword from "./users/ChangePassword";
 import { AuthProvider } from "./authcontext/AuthContext";
 import Gestao from "./users/Gestao/Gestao";
+import Cart from "./cart/Cart";
 
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
           <Route path="/account" element={<Account />} />
           <Route path="/changepassword" element={<ChangePassword />} />
           <Route path="/gestao" element={<Gestao />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
         </AuthProvider>
       </main>
