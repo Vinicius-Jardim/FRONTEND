@@ -18,6 +18,7 @@ import logo from "../assets/logo.jpg";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Cart from "../cart/Cart"; // Importação do componente do carrinho
 import "./Header.css";
+import { useAuth } from "../authcontext/AuthContext";
 
 export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -27,6 +28,9 @@ export default function PrimarySearchAppBar() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const isCartOpen = Boolean(cartAnchorEl); // Verifica se o dropdown do carrinho está aberto
+
+
+  const { user } = useAuth(); // Use o hook useAuth para obter o usuário atual
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -135,7 +139,7 @@ export default function PrimarySearchAppBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <Toolbar className="custom-toolbar"> {/* Adicione a classe custom-toolbar */}
+        <Toolbar className="custom-toolbar">
           <IconButton
             size="large"
             edge="start"
@@ -151,7 +155,11 @@ export default function PrimarySearchAppBar() {
           </Typography>
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <Button color="inherit" component={Link} to="/">Home</Button>
-            <Button color="inherit" component={Link} to="/gestao">Gestão</Button>
+            {user && user.scopes && user.scopes.includes('admin') && (
+              <Button color="inherit" component={Link} to="/gestao">
+                Gestão
+              </Button>
+            )}
             {/* Ícone do carrinho com badge de quantidade de itens */}
             <IconButton
               aria-label="show shopping cart"

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from "../../header/Header";
 import chaveImage from '../../assets/chave.png';
 import sairImage from '../../assets/sair.png';
@@ -10,17 +10,36 @@ const Account = () => {
   const { user, logout } = useAuth();
   const [reports, setReports] = useState(null);
 
+  // Definir a função fetchReports dentro do escopo do componente
   const fetchReports = async () => {
-    console.log(user); // Adicione esta linha
-    const token = localStorage.getItem('token');
-    const response = await fetch(`http://127.0.0.1:3000/oders/reports/user/${user.id}`, {
-      headers: {
-        'x-access-token': token
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        throw new Error('Token não encontrado');
       }
-    });
-    const data = await response.json();
-    setReports(data);
+      
+      const response = await fetch(`http://127.0.0.1:3000/orders/reports/${user.id}`, {
+        headers: {
+          'x-access-token': token
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Erro ao buscar relatórios');
+      }
+
+      const data = await response.json();
+      setReports(data);
+    } catch (error) {
+      console.error('Erro ao buscar relatórios:', error);
+    }
   };
+
+  useEffect(() => {
+    if (user) {
+      fetchReports(); // Chamada inicial para buscar os relatórios ao carregar o componente
+    }
+  }, [user]); // Executar useEffect sempre que user mudar
 
   return (
     <React.Fragment>
@@ -43,15 +62,18 @@ const Account = () => {
               <button className="button" onClick={fetchReports}>
                 Ver Encomendas
               </button>
-              {reports && (
-                <div>
-                  {reports.map((report, index) => (
+              <div>
+                {reports && reports.length > 0 ? (
+                  reports.map((report, index) => (
                     <div key={index}>
-                      {/* Renderize os detalhes do relatório aqui */}
+                      <h2>Relatório {index + 1}</h2>
+                      <pre>{report.report}</pre>
                     </div>
-                  ))}
-                </div>
-              )}
+                  ))
+                ) : (
+                  <p>Nenhum relatório encontrado</p>
+                )}
+              </div>
             </div>
           </>
         ) : (
