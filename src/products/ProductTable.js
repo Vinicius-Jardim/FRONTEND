@@ -36,7 +36,7 @@ const ProductTable = ({ url }) => {
       "http://127.0.0.1:3000/store/products?" +
       new URLSearchParams({
         limit: pageSize,
-        skip: (current - 1) * pageSize,
+        skip: (current - 1) ,
         sortBy: sortBy
       });
 
