@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from "../../header/Header";
 import chaveImage from '../../assets/chave.png';
 import sairImage from '../../assets/sair.png';
@@ -8,6 +8,19 @@ import { useAuth } from "../../authcontext/AuthContext";
 
 const Account = () => {
   const { user, logout } = useAuth();
+  const [reports, setReports] = useState(null);
+
+  const fetchReports = async () => {
+    console.log(user); // Adicione esta linha
+    const token = localStorage.getItem('token');
+    const response = await fetch(`http://127.0.0.1:3000/oders/reports/user/${user.id}`, {
+      headers: {
+        'x-access-token': token
+      }
+    });
+    const data = await response.json();
+    setReports(data);
+  };
 
   return (
     <React.Fragment>
@@ -15,7 +28,7 @@ const Account = () => {
       <div className="container">
         {user ? (
           <>
-            <h2 className="title">Bem-vindo, {user.name}!</h2> {/* Ajuste aqui para user.name */}
+            <h2 className="title">Bem-vindo, {user.name}!</h2>
             <div className="button-container">
               <button className="button">
                 <Link to="/changepassword">
@@ -27,6 +40,18 @@ const Account = () => {
                 <img src={sairImage} alt="Sair" className="icon" />
                 Sair do Login
               </button>
+              <button className="button" onClick={fetchReports}>
+                Ver Encomendas
+              </button>
+              {reports && (
+                <div>
+                  {reports.map((report, index) => (
+                    <div key={index}>
+                      {/* Renderize os detalhes do relatório aqui */}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </>
         ) : (
