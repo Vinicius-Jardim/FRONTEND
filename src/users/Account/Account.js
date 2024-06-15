@@ -9,8 +9,9 @@ import { useAuth } from "../../authcontext/AuthContext";
 const Account = () => {
   const { user, logout } = useAuth();
   const [reports, setReports] = useState(null);
+  const [showReports, setShowReports] = useState(false); 
+  const [hasClicked, setHasClicked] = useState(false); // Nova variável de estado para verificar se o botão foi clicado
 
-  // Definir a função fetchReports dentro do escopo do componente
   const fetchReports = async () => {
     try {
       const token = localStorage.getItem('token');
@@ -36,10 +37,10 @@ const Account = () => {
   };
 
   useEffect(() => {
-    if (user) {
-      fetchReports(); // Chamada inicial para buscar os relatórios ao carregar o componente
+    if (user && showReports) { // Modificado para verificar showReports
+      fetchReports();
     }
-  }, [user]); // Executar useEffect sempre que user mudar
+  }, [user, showReports]); // Adicionado showReports como dependência
 
   return (
     <React.Fragment>
@@ -59,20 +60,23 @@ const Account = () => {
                 <img src={sairImage} alt="Sair" className="icon" />
                 Sair do Login
               </button>
-              <button className="button" onClick={fetchReports}>
+              <button className="button" onClick={() => {
+                setShowReports(prev => !prev);
+                setHasClicked(true); // Definir hasClicked como true quando o botão for clicado
+              }}>
                 Ver Encomendas
               </button>
               <div>
-                {reports && reports.length > 0 ? (
+                {showReports && reports && reports.length > 0 ? ( 
                   reports.map((report, index) => (
                     <div key={index}>
                       <h2>Relatório {index + 1}</h2>
                       <pre>{report.report}</pre>
                     </div>
                   ))
-                ) : (
+                ) : hasClicked ? ( // Modificado para verificar hasClicked
                   <p>Nenhum relatório encontrado</p>
-                )}
+                ) : null}
               </div>
             </div>
           </>
