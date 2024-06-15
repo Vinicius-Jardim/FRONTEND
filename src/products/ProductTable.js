@@ -93,6 +93,7 @@ const ProductTable = ({ url }) => {
   const handleAddToCart = (product) => {
     if (!user) {
       console.log("Usuário não autenticado");
+    
       return;
     }
 
@@ -108,6 +109,7 @@ const ProductTable = ({ url }) => {
     localStorage.setItem(`cart-${user.id}`, JSON.stringify(cart));
     console.log(`Produto adicionado ao carrinho: ${product.titulo}`);
     console.log(`Carrinho atualizado:`, cart);
+    alert(`O produto ${product.titulo} foi adicionado ao carrinho.`);
   };
 
   return (
@@ -133,13 +135,12 @@ const ProductTable = ({ url }) => {
               cover={<img alt={product.image} src={product.imagem} />}
             >
               <p>Preço: {product.preço}</p>
-              <p>Stock: {product.stock}</p>
+              <p>Descrição: {product.descrição}</p>
               <Link to={`/products/${product._id}`}>
                 <Button type="primary">Ver Detalhes</Button>
               </Link>
-              <Button onClick={() => handleAddToCart(product)} type="primary" style={{ marginTop: '10px' }}>
-                Adicionar ao Carrinho
-              </Button>
+              <Button onClick={() => handleAddToCart(product)}>Adicionar ao Carrinho</Button>
+              
             </Card>
           </Col>
         ))}

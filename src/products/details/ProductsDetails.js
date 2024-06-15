@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./ProductsDetails.css";
-import config from "../../Config";
 import { useParams, Navigate } from "react-router-dom";
 import Header from "../../header/Header";
+import { Button } from "antd";
+import { useAuth } from "../../authcontext/AuthContext";
 
 const ProductsDetails = () => {
+  const { user } = useAuth();
   const { productId } = useParams();
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState(null);
@@ -12,7 +14,7 @@ const ProductsDetails = () => {
   useEffect(() => {
     if (productId) {
       fetch(`http://127.0.0.1:3000/store/products/${productId}`, {
-        headers: { Accept: "application/json", "x-access-token": localStorage.getItem('token') },
+        headers: { Accept: "application/json" },
       })
         .then((response) => {
           console.log("Response status:", response.status); // Log do status da resposta
@@ -36,11 +38,29 @@ const ProductsDetails = () => {
     }
   }, [productId]);
 
-  console.log("Product ID:", productId); // Log do ID do produto
 
-  if (!localStorage.getItem('token')) {
-    return <Navigate to="/" />;
-  }
+
+  const handleAddToCart = (product) => {
+    if (!user) {
+      console.log("Usuário não autenticado");
+      return;
+    }
+
+    const cart = JSON.parse(localStorage.getItem(`cart-${user.id}`)) || [];
+    const existingProduct = cart.find(item => item._id === product._id);
+
+    if (existingProduct) {
+      existingProduct.quantity += 1;
+    } else {
+      cart.push({ ...product, quantity: 1 });
+    }
+
+    localStorage.setItem(`cart-${user.id}`, JSON.stringify(cart));
+    console.log(`Produto adicionado ao carrinho: ${product.titulo}`);
+    console.log(`Carrinho atualizado:`, cart);
+    alert(`O produto ${product.titulo} foi adicionado ao carrinho.`);
+  };
+
 
   if (!product) {
     return <div>Loading...</div>;
@@ -52,6 +72,7 @@ const ProductsDetails = () => {
       <h2>{product.titulo}</h2>
       <p>Em Stock: {product.stock}</p>
       {product.preço} €<p>{product.descrição} </p>
+      <Button onClick={() => handleAddToCart(product)}>Adicionar ao Carrinho</Button>
     </div>
   );
 };
