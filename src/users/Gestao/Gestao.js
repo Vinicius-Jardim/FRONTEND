@@ -210,7 +210,7 @@ const Gestao = () => {
             {products.map((product) => (
               <tr key={product._id}>
                 <td>{product.titulo}</td>
-                <td>R$ {product.preço}</td>
+                <td>EUR {product.preço}</td>
                 <td>{product.categoria}</td>
                 <td>{product.stock}</td>
                 <td className="gestao-actions">

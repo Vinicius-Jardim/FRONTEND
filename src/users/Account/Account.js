@@ -88,7 +88,7 @@ const Account = () => {
               <button className="button">
                 <Link to="/changepassword">
                   <img src={chaveImage} alt="Recuperar Palavra-Passe" className="icon" />
-                  Recuperar Palavra-Passe
+                  Alterar Palavra-Passe
                 </Link>
               </button>
               <button className="button" onClick={logout}>
