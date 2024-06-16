@@ -39,8 +39,6 @@ const ProductsDetails = () => {
     }
   }, [productId]);
 
-
-
   const handleAddToCart = (product) => {
     if (!user) {
       console.log("Usuário não autenticado");
@@ -48,7 +46,7 @@ const ProductsDetails = () => {
     }
 
     const cart = JSON.parse(localStorage.getItem(`cart-${user.id}`)) || [];
-    const existingProduct = cart.find(item => item._id === product._id);
+    const existingProduct = cart.find((item) => item._id === product._id);
 
     if (existingProduct) {
       existingProduct.quantity += 1;
@@ -62,7 +60,6 @@ const ProductsDetails = () => {
     alert(`O produto ${product.titulo} foi adicionado ao carrinho.`);
   };
 
-
   if (!product) {
     return <div>Loading...</div>;
   }
@@ -70,11 +67,25 @@ const ProductsDetails = () => {
   return (
     <div>
       <Header />
-      <h2>{product.titulo}</h2>
-      <p>Em Stock: {product.stock}</p>
-      {product.preço} €<p>{product.descrição} </p>
-      <Button onClick={() => handleAddToCart(product)}>Adicionar ao Carrinho</Button>
-    <Footer />
+      <div style={{ display: "flex", marginTop: "20px" }}>
+        <div style={{ flex: "1", paddingRight: "20px" }}>
+          <img
+            alt={product.image}
+            src={product.imagem}
+            style={{ width: "50%", height: "auto", objectFit: "cover" }}
+          />
+        </div>
+        <div style={{ flex: "2" }}>
+          <h2>{product.titulo}</h2>
+          <p>Em Stock: {product.stock}</p>
+          <p>{product.preço} €</p>
+          <p>{product.descrição}</p>
+          <Button onClick={() => handleAddToCart(product)}>
+            Adicionar ao Carrinho
+          </Button>
+        </div>
+      </div>
+      <Footer />
     </div>
   );
 };

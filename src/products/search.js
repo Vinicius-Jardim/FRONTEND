@@ -1,23 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { SearchOutlined } from "@ant-design/icons";
 
 const SearchBar = ({ setQuery }) => {
-  const [localQuery, setLocalQuery] = useState('');
+  const [localQuery, setLocalQuery] = useState("");
 
   const search = (event) => {
     event.preventDefault();
-    setQuery(localQuery); // Atualizar a consulta no componente ProductTable
+    setQuery(localQuery);
   };
 
   return (
     <form onSubmit={search}>
       <input
+        style={{
+          height: "35px",
+          width: "250px",
+          marginTop: "10px",
+          borderStyle: "solid",
+          borderRadius: "5px",
+        }}
         type="search"
-        placeholder="Search"
+        placeholder="O que procura?"
         value={localQuery}
-        onChange={event => setLocalQuery(event.target.value)}
-        className="search-input" //  para css
+        onChange={(event) => setLocalQuery(event.target.value)}
+        className="search-input"
       />
-      <button type="submit">Search</button>
+      <button
+        style={{
+          height: "35px",
+          marginTop: "10px",
+          backgroundColor: "transparent",
+          border: "none",
+        }}
+        type="submit"
+      >
+        <SearchOutlined style={{ fontSize: "1.5rem"}} />
+      </button>
     </form>
   );
 };

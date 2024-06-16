@@ -14,7 +14,7 @@ import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import logo from "../assets/logo.jpg";
+import logo from "../assets/logo.png";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Cart from "../cart/Cart"; // Importação do componente do carrinho
 import "./Header.css";
@@ -28,7 +28,6 @@ export default function PrimarySearchAppBar() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const isCartOpen = Boolean(cartAnchorEl); // Verifica se o dropdown do carrinho está aberto
-
 
   const { user } = useAuth(); // Use o hook useAuth para obter o usuário atual
 
@@ -98,11 +97,7 @@ export default function PrimarySearchAppBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 4 new mails"
-          color="inherit"
-        >
+        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="error">
             <MailIcon />
           </Badge>
@@ -153,9 +148,11 @@ export default function PrimarySearchAppBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             The GreenHouse
           </Typography>
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <Button color="inherit" component={Link} to="/">Home</Button>
-            {user && user.scopes && user.scopes.includes('admin') && (
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            <Button color="inherit" component={Link} to="/">
+              Home
+            </Button>
+            {user && user.scopes && user.scopes.includes("admin") && (
               <Button color="inherit" component={Link} to="/gestao">
                 Gestão
               </Button>
@@ -196,7 +193,7 @@ export default function PrimarySearchAppBar() {
               <AccountCircle />
             </IconButton>
           </Box>
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="show more"

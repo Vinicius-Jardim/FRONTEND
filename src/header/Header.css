@@ -9,11 +9,6 @@
   color: #346c51;
 }
 
-.logo {
-  height: 9vh;
-  width: 9%;
-}
-
 .menu-icon {
   color: #d0d6b5;
 }
@@ -43,7 +38,7 @@ img {
 }
 
 .logo {
-  height: 8vh; /* Ajuste a altura do logo conforme necessário */
+  height: 10vh; /* Ajuste a altura do logo conforme necessário */
   width: auto; /* Garante que a largura seja ajustada proporcionalmente */
 }
 
