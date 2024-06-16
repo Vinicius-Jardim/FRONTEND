@@ -5,6 +5,7 @@ import sairImage from '../../assets/sair.png';
 import './Account.css';
 import { Link } from 'react-router-dom';
 import { useAuth } from "../../authcontext/AuthContext";
+import Footer from "../../footer/Footer";
 
 const Account = () => {
   const { user, logout } = useAuth();

@@ -5,6 +5,8 @@ import Header from "../../header/Header";
 import { Button } from "antd";
 import { useAuth } from "../../authcontext/AuthContext";
 import Footer from "../../footer/Footer";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import StarIcon from "@mui/icons-material/Star";
 
 const ProductsDetails = () => {
   const { user } = useAuth();
@@ -67,22 +69,58 @@ const ProductsDetails = () => {
   return (
     <div>
       <Header />
-      <div style={{ display: "flex", marginTop: "20px" }}>
+      <div
+        style={{ display: "flex", marginTop: "20px", alignItems: "flex-start" }}
+        className="Imagem"
+      >
         <div style={{ flex: "1", paddingRight: "20px" }}>
           <img
             alt={product.image}
             src={product.imagem}
-            style={{ width: "50%", height: "auto", objectFit: "cover" }}
+            style={{ width: "100%", height: "auto", objectFit: "cover" }}
           />
         </div>
-        <div style={{ flex: "2" }}>
-          <h2>{product.titulo}</h2>
-          <p>Em Stock: {product.stock}</p>
-          <p>{product.preço} €</p>
-          <p>{product.descrição}</p>
-          <Button onClick={() => handleAddToCart(product)}>
-            Adicionar ao Carrinho
-          </Button>
+        <div
+          style={{
+            flex: "2",
+            display: "flex",
+            flexDirection: "column",
+            gap: "10px",
+            marginRight: "10px",
+          }}
+          className="Detalhes"
+        >
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <h2 style={{}}>{product.titulo}</h2>
+            <Button onClick={() => handleAddToCart(product)}>
+              <AddShoppingCartIcon />
+            </Button>
+          </div>
+          <p
+            style={{ display: "flex", alignItems: "center", textAlign: "left" }}
+          >
+            {product.classificação}
+            <StarIcon
+              style={{
+                fontSize: "inherit",
+                marginLeft: "5px",
+              }}
+            />
+          </p>
+
+          <p style={{ textAlign: "left" }}>
+            <strong>Em Stock:</strong> {product.stock}
+          </p>
+          <p style={{ textAlign: "left" }}>
+            <strong>Preço:</strong> {product.preço} €
+          </p>
+          <p style={{ textAlign: "left" }}>{product.descrição}</p>
         </div>
       </div>
       <Footer />

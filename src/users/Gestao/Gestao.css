@@ -51,12 +51,14 @@
   }
   
   .gestao-edit-btn {
-    background-color: #2196f3;
+    background-color: #000000;
     color: #fff;
     border: none;
   }
   
   .gestao-edit-btn:hover {
-    background-color: #0d8bf0;
+    background-color: #484848;
   }
+
+  
   

@@ -18,7 +18,7 @@
 .login-page h1 {
   font-size: 2.5em;
   margin-bottom: 1em;
-  color: #ffffff; /* Cor rosa para o título */
+  color: #ffffff; 
 }
 
 .login-form {
@@ -28,8 +28,8 @@
   gap: 1em;
   padding: 2em;
   border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra para a caixa de diálogo */
-  background-color: #346d51da; /* Fundo branco para a caixa de diálogo */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #346d51da; 
 }
 
 .login-form input {
@@ -42,14 +42,14 @@
   padding: 0.5em;
   border: none;
   border-radius: 5px;
-  background-color: #ffffff; /* Cor rosa para o botão */
+  background-color: #ffffff; 
   color: #000000;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .login-form button:hover {
-  background-color: #ffffff; /* Cor rosa mais escura para o hover do botão */
+  background-color: #ffffff;
 }
 
 .login-form .error-message {
