@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Header from "../header/Header";
 import ProductTable from "./ProductTable";
+import Footer from "../footer/Footer";
 
 const getToken = () => localStorage.getItem('token');
 
@@ -49,6 +50,7 @@ const Products = () => {
       <div className="player-container">
         <ProductTable url={location} products={products} />
       </div>
+      <Footer />
     </>
   );
 };

@@ -125,26 +125,26 @@ const ProductTable = ({ url }) => {
         </select>
       </div>
 
-      <Row gutter={[16, 16]}>
-        {(products ?? []).map((product) => (
-          <Col className="card" key={product._id} xs={24} sm={12} md={8} lg={6}>
-            <Card
-              title={product.titulo}
-              hoverable
-              style={{ width: 240 }}
-              cover={<img alt={product.image} src={product.imagem} />}
-            >
-              <p>Preço: {product.preço}</p>
-              <p>Descrição: {product.descrição}</p>
-              <Link to={`/products/${product._id}`}>
-                <Button type="primary">Ver Detalhes</Button>
-              </Link>
-              <Button onClick={() => handleAddToCart(product)}>Adicionar ao Carrinho</Button>
-              
-            </Card>
-          </Col>
-        ))}
-      </Row>
+      <Row gutter={[16, 16]} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))' }}>
+  {(products ?? []).map((product) => (
+    <Col className="card" key={product._id}>
+      <Card
+        title={product.titulo}
+        hoverable
+        style={{ width: '100%', height: '100%' }}
+        cover={<img alt={product.image} src={product.imagem} style={{ height: '200px', objectFit: 'cover' }} />}
+      >
+        <p>Preço: {product.preço}</p>
+        <p>Descrição: {product.descrição}</p>
+        <Link to={`/products/${product._id}`}>
+          <Button type="primary">Ver Detalhes</Button>
+        </Link>
+        <Button onClick={() => handleAddToCart(product)}>Adicionar ao Carrinho</Button>
+      </Card>
+    </Col>
+  ))}
+</Row>
+
       <Pagination
         current={pagination?.current}
         pageSize={pagination?.pageSize}

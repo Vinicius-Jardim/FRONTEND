@@ -4,6 +4,7 @@ import { useParams, Navigate } from "react-router-dom";
 import Header from "../../header/Header";
 import { Button } from "antd";
 import { useAuth } from "../../authcontext/AuthContext";
+import Footer from "../../footer/Footer";
 
 const ProductsDetails = () => {
   const { user } = useAuth();
@@ -73,6 +74,7 @@ const ProductsDetails = () => {
       <p>Em Stock: {product.stock}</p>
       {product.preço} €<p>{product.descrição} </p>
       <Button onClick={() => handleAddToCart(product)}>Adicionar ao Carrinho</Button>
+    <Footer />
     </div>
   );
 };
